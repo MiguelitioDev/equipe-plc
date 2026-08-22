@@ -1,0 +1,26 @@
+# Mensagem para a Equipe
+
+Carlos e Lucas, eu fiz o seguinte: eu organizei algumas pastas aqui, coloquei esse arquivo .md que é bom vocês lerem também, e eu quero que a gente separe as commits de cada um em si.
+
+---
+
+## Resumo do Projeto (Missão Marte Unifor)
+
+- **Linguagem & Arquitetura**: Java (Console) com estrutura em POO no pacote `missao` (`src/missao/`).
+- **Classes Principais**:
+  - `Passageiro` (base), `Professor` e `Engenheiro` (subclasses/herança);
+  - `Asteroide` (obstáculo e detecção de colisão);
+  - `Nave` (movimentação e controle de capacidade);
+  - `Missao` (orquestração do jogo e regras de embarque);
+  - `Main` (loop principal do jogo, renderização do mapa e persistência em `ranking.json`).
+- **Documentação de Apoio**: `TUTORIAL-MISSAO-MARTE.md` contém o roteiro de aulas e 10 exercícios práticos graduados.
+
+---
+
+## Histórico de Commits por Autor
+
+### Prof. Bezerra / Marcelo Bezerra de Alcântara
+- `524699e` (2026-08-12): Projeto OO - console nave
+- `ecda2de` (2026-08-12): Initial commit
+
+*(Observação: Os integrantes Carlos, Lucas e demais membros ainda não possuem commits registrados nesta branch).*
