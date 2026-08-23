@@ -42,10 +42,12 @@ public class Main {
                 System.out.printf(" %d. %s: %d pontos%n", i + 1, entry.name, entry.score);
             }
         }
-                
+
         System.out.println();
-        System.out.println("Bem-vindo à Missão Marte Unifor! Sua nave foi selecionada para uma expedição de resgate e pesquisa na superfície marciana.");
-        System.out.println("Seu objetivo é localizar e embarcar todos os passageiros necessários para completar a missão antes que o seu tempo (pontuação) chegue a zero.");
+        System.out.println(
+                "Bem-vindo à Missão Marte Unifor! Sua nave foi selecionada para uma expedição de resgate e pesquisa na superfície marciana.");
+        System.out.println(
+                "Seu objetivo é localizar e embarcar todos os passageiros necessários para completar a missão antes que o seu tempo (pontuação) chegue a zero.");
         System.out.println();
         System.out.println("Objetivo:");
         System.out.println(" - Mover a nave pelo mapa");
@@ -61,7 +63,8 @@ public class Main {
         System.out.println(" - c: embarcar passageiro na posição atual");
         System.out.println(" - q: sair do jogo");
         System.out.println();
-        System.out.println("Pontuação inicial: 20 pontos. Cada movimento custa 1 ponto. Cada embarque vale +10 pontos.");
+        System.out
+                .println("Pontuação inicial: 20 pontos. Cada movimento custa 1 ponto. Cada embarque vale +10 pontos.");
         System.out.println();
         System.out.println("Pressione Enter para iniciar a missão...");
         scanner.nextLine();
@@ -76,8 +79,10 @@ public class Main {
 
             while (running) {
                 desenharMapa(missao, -5, 5, -5, 5, score, pilotoNome);
-                System.out.printf("Nave em (%d,%d) | Pontos: %d | Passageiros a bordo: %d | Passageiros restantes: %d\n",
-                        nave.getX(), nave.getY(), score, nave.getPassageiros().size(), missao.todosEmbarcados() ? 0 : missao.getPassageiros().size());
+                System.out.printf(
+                        "Nave em (%d,%d) | Pontos: %d | Passageiros a bordo: %d | Passageiros restantes: %d\n",
+                        nave.getX(), nave.getY(), score, nave.getPassageiros().size(),
+                        missao.todosEmbarcados() ? 0 : missao.getPassageiros().size());
 
                 if (missao.verificaColisao()) {
                     System.out.println("Colisão com asteroide! Missão abortada.");
@@ -86,13 +91,26 @@ public class Main {
 
                 System.out.print("Para onde ir? ");
                 String line = scanner.nextLine().trim().toLowerCase();
-                if (line.isEmpty()) continue;
+                if (line.isEmpty())
+                    continue;
                 char cmd = line.charAt(0);
                 switch (cmd) {
-                    case 'w': nave.moveUp(); score--; break;
-                    case 's': nave.moveDown(); score--; break;
-                    case 'a': nave.moveLeft(); score--; break;
-                    case 'd': nave.moveRight(); score--; break;
+                    case 'w':
+                        nave.moveUp();
+                        score--;
+                        break;
+                    case 's':
+                        nave.moveDown();
+                        score--;
+                        break;
+                    case 'a':
+                        nave.moveLeft();
+                        score--;
+                        break;
+                    case 'd':
+                        nave.moveRight();
+                        score--;
+                        break;
                     case 'c': {
                         Passageiro p = missao.passagemNaPosicao();
                         if (p == null) {
@@ -100,7 +118,7 @@ public class Main {
                         } else {
                             boolean ok = missao.embarcarPassageiroNaPosicao();
                             if (ok) {
-                                score += 10;
+                                score += p.getPontuacao();
                                 System.out.println("Passageiro embarcado. +10 pontos!");
                             } else {
                                 System.out.println("Nave cheia, não foi possível embarcar.");
@@ -108,8 +126,11 @@ public class Main {
                         }
                         break;
                     }
-                    case 'q': running = false; break;
-                    default: System.out.println("Comando desconhecido.");
+                    case 'q':
+                        running = false;
+                        break;
+                    default:
+                        System.out.println("Comando desconhecido.");
                 }
 
                 if (score <= 0) {
@@ -169,8 +190,10 @@ public class Main {
         while (missao.getPassageiros().size() < 3) {
             int x = random.nextInt(maxX - minX + 1) + minX;
             int y = random.nextInt(maxY - minY + 1) + minY;
-            if (x == nave.getX() && y == nave.getY()) continue;
-            if (posicaoOcupada(missao, x, y)) continue;
+            if (x == nave.getX() && y == nave.getY())
+                continue;
+            if (posicaoOcupada(missao, x, y))
+                continue;
             if (missao.getPassageiros().isEmpty()) {
                 missao.addPassageiro(new Professor("Dr. Silva", x, y));
             } else if (missao.getPassageiros().size() == 1) {
@@ -183,8 +206,10 @@ public class Main {
         while (missao.getAsteroides().size() < 2) {
             int x = random.nextInt(maxX - minX + 1) + minX;
             int y = random.nextInt(maxY - minY + 1) + minY;
-            if (x == nave.getX() && y == nave.getY()) continue;
-            if (posicaoOcupada(missao, x, y)) continue;
+            if (x == nave.getX() && y == nave.getY())
+                continue;
+            if (posicaoOcupada(missao, x, y))
+                continue;
             missao.addAsteroide(new Asteroide(x, y));
         }
 
@@ -192,17 +217,21 @@ public class Main {
     }
 
     private static boolean posicaoOcupada(Missao missao, int x, int y) {
-        if (missao.getNave().getX() == x && missao.getNave().getY() == y) return true;
+        if (missao.getNave().getX() == x && missao.getNave().getY() == y)
+            return true;
         for (Passageiro p : missao.getPassageiros()) {
-            if (p.getX() == x && p.getY() == y) return true;
+            if (p.getX() == x && p.getY() == y)
+                return true;
         }
         for (Asteroide a : missao.getAsteroides()) {
-            if (a.getX() == x && a.getY() == y) return true;
+            if (a.getX() == x && a.getY() == y)
+                return true;
         }
         return false;
     }
 
-    private static void desenharMapa(Missao missao, int minX, int maxX, int minY, int maxY, int score, String pilotoNome) {
+    private static void desenharMapa(Missao missao, int minX, int maxX, int minY, int maxY, int score,
+            String pilotoNome) {
         System.out.println();
         System.out.printf("Mapa da Missão (Pontos: %d) - Piloto: %s%n", score, pilotoNome);
         System.out.print("    ");
@@ -313,15 +342,18 @@ public class Main {
         int index = 0;
         while (index < json.length()) {
             int start = json.indexOf('{', index);
-            if (start < 0) break;
+            if (start < 0)
+                break;
             int end = json.indexOf('}', start);
-            if (end < 0) break;
+            if (end < 0)
+                break;
             String object = json.substring(start + 1, end);
             String name = null;
             Integer score = null;
             for (String part : object.split(",")) {
                 String[] pair = part.split(":", 2);
-                if (pair.length != 2) continue;
+                if (pair.length != 2)
+                    continue;
                 String key = pair[0].trim().replaceAll("\"", "");
                 String value = pair[1].trim();
                 if (key.equals("name")) {

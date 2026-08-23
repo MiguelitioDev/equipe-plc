@@ -23,4 +23,19 @@ Carlos e Lucas, eu fiz o seguinte: eu organizei algumas pastas aqui, coloquei es
 - `524699e` (2026-08-12): Projeto OO - console nave
 - `ecda2de` (2026-08-12): Initial commit
 
-*(Observação: Os integrantes Carlos, Lucas e demais membros ainda não possuem commits registrados nesta branch).*
+*OBS: Vocês ainda não tem suas branches, eu vou fazer a minha agora e depois vocês criem as suas para servirem como os primeiros committs*
+*Branches Pendentes: Carlos, Lucas*
+
+## COdigo Modificado Por Miguel:
+
+Passageiro.java(
+  Adição do metodo
+  public int getPontuacao() {
+        return 10;
+    }
+)
+
+Main.java(
+  Substituição de score += 10 por score += p.getPontuacao();
+  da linha: 103
+)
