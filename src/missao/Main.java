@@ -80,12 +80,15 @@ public class Main {
             while (running) {
                 desenharMapa(missao, -5, 5, -5, 5, score, pilotoNome);
                 System.out.printf(
-                        "Nave em (%d,%d) | Pontos: %d | Passageiros a bordo: %d | Passageiros restantes: %d\n",
-                        nave.getX(), nave.getY(), score, nave.getPassageiros().size(),
+                        "Nave em (%d,%d) | Vida: %d | Pontos: %d | Passageiros a bordo: %d | Passageiros restantes: %d\n",
+                        nave.getX(), nave.getY(), nave.getVida(), score, nave.getPassageiros().size(),
                         missao.todosEmbarcados() ? 0 : missao.getPassageiros().size());
 
                 if (missao.verificaColisao()) {
-                    System.out.println("Colisão com asteroide! Missão abortada.");
+                    System.out.println("Colisão com asteroide! Nave Danificada");
+                    nave.perderVida();
+                }else if (nave.getVida() <= 0) {
+                    System.out.println("Vida zerada! Missão abortada.");
                     break;
                 }
 
@@ -184,10 +187,10 @@ public class Main {
     }
 
     private static Missao criarNovaMissao(Random random, int minX, int maxX, int minY, int maxY) {
-        Nave nave = new Nave("A-1", 3);
+        Nave nave = new Nave("A-1", 4);
         Missao missao = new Missao(nave);
 
-        while (missao.getPassageiros().size() < 3) {
+        while (missao.getPassageiros().size() < 4) {
             int x = random.nextInt(maxX - minX + 1) + minX;
             int y = random.nextInt(maxY - minY + 1) + minY;
             if (x == nave.getX() && y == nave.getY())
@@ -198,6 +201,8 @@ public class Main {
                 missao.addPassageiro(new Professor("Dr. Silva", x, y));
             } else if (missao.getPassageiros().size() == 1) {
                 missao.addPassageiro(new Engenheiro("Eng. Rosa", x, y));
+            } else if (missao.getPassageiros().size() == 2) {
+                missao.addPassageiro(new Astronauta("Astronauta1", x, y));
             } else {
                 missao.addPassageiro(new Professor("Dr. Lima", x, y));
             }
@@ -256,6 +261,8 @@ public class Main {
                         if (p.getX() == x && p.getY() == y) {
                             if (p instanceof Engenheiro) {
                                 symbol = 'E';
+                            } else if (p instanceof Astronauta){
+                                symbol = 'S';
                             } else {
                                 symbol = 'P';
                             }
