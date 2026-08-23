@@ -26,7 +26,7 @@ Carlos e Lucas, eu fiz o seguinte: eu organizei algumas pastas aqui, coloquei es
 *OBS: Vocês ainda não tem suas branches, eu vou fazer a minha agora e depois vocês criem as suas para servirem como os primeiros committs*
 *Branches Pendentes: Carlos, Lucas*
 
-## COdigo Modificado Por Miguel:
+## Codigo Modificado Por Miguel:
 
 Passageiro.java(
   Adição do metodo
@@ -35,7 +35,27 @@ Passageiro.java(
     }
 )
 
+Professor.java(
+  Sobrescrita do metodo getPontuacao() retornando 20 pontos
+)
+
+Engenheiro.java(
+  Sobrescrita do metodo getPontuacao() retornando 40 pontos
+)
+
+Astronauta.java(
+  Criação da classe Astronauta herdando de Passageiro
+  Adição do metodo getPontuacao() retornando 15 pontos
+)
+
+Nave.java(
+  Adição do atributo vida (iniciando com 3 vidas no construtor)
+  Adição dos metodos getVida() e perderVida()
+)
+
 Main.java(
   Substituição de score += 10 por score += p.getPontuacao();
-  da linha: 103
+  Adição das vidas da nave na tela
+  Chamada do nave.perderVida() na colisão e checagem de fim de jogo se a vida zerar
+  Adição do Astronauta no sorteio de passageiros e símbolo 'S' no mapa
 )
