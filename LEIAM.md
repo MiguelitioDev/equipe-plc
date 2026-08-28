@@ -59,3 +59,25 @@ Main.java(
   Chamada do nave.perderVida() na colisão e checagem de fim de jogo se a vida zerar
   Adição do Astronauta no sorteio de passageiros e símbolo 'S' no mapa
 )
+
+## Codigo Modificado Por Carlos:
+
+Inimigo.java(
+  Criação da classe Inimigo com coordenadas (x, y)
+  Adição dos métodos getters e setters (getX, getY, setX, setY)
+  Adição do método colideCom(Nave n)
+)
+
+Missao.java(
+  Adição da lista de Inimigos (List<Inimigo> inimigos)
+  Adição dos métodos getInimigos() e addInimigo(Inimigo i)
+  Adição do método moverInimigos(Random random, int minX, int maxX, int minY, int maxY)
+  Atualização de verificaColisao() para checar colisão com Inimigos
+)
+
+Main.java(
+  Adição da geração de Inimigos no método criarNovaMissao()
+  Adição da validação de Inimigos em posicaoOcupada()
+  Chamada do método missao.moverInimigos() a cada turno do loop
+  Renderização do caractere 'X' para os Inimigos no mapa e atualização da legenda
+)
