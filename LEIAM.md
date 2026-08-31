@@ -53,11 +53,19 @@ Nave.java(
   Adição dos metodos getVida() e perderVida()
 )
 
+Dificuldade.java(
+  Criação do Enum (FACIL, MEDIO, DIFICIL)
+  Adição dos parâmetros de combustível inicial, asteroides e inimigos
+  Adição dos métodos de conversão deString(), fromString() e toString()
+)
+
 Main.java(
   Substituição de score += 10 por score += p.getPontuacao();
   Adição das vidas da nave na tela
   Chamada do nave.perderVida() na colisão e checagem de fim de jogo se a vida zerar
   Adição do Astronauta no sorteio de passageiros e símbolo 'S' no mapa
+  Integração da seleção de Dificuldade no menu ao iniciar o jogo
+  Geração parametrizada da quantidade de asteroides e inimigos conforme a Dificuldade
 )
 
 ## Codigo Modificado Por Carlos:

@@ -85,9 +85,10 @@ public class Main {
             
             switch (opcao) {
                 case '1':
-                    Missao missao = criarNovaMissao(random, minX, maxX, minY, maxY);
+                    Dificuldade dificuldade = lerDificuldade(scanner);
+                    Missao missao = criarNovaMissao(random, minX, maxX, minY, maxY, dificuldade);
                     Nave nave = missao.getNave();
-                    int score = 20;
+                    int score = dificuldade.getCombustivelInicial();
                     boolean running = true;
                     long startTime = System.currentTimeMillis();
                     int steps = 0;
@@ -225,7 +226,17 @@ public class Main {
         }
     }
 
+    private static Dificuldade lerDificuldade(Scanner scanner) {
+        System.out.print("Escolha a dificuldade (1-Facil / 2-Medio / 3-Dificil): ");
+        String difStr = scanner.nextLine().trim();
+        return Dificuldade.deString(difStr);
+    }
+
     private static Missao criarNovaMissao(Random random, int minX, int maxX, int minY, int maxY) {
+        return criarNovaMissao(random, minX, maxX, minY, maxY, Dificuldade.MEDIO);
+    }
+
+    private static Missao criarNovaMissao(Random random, int minX, int maxX, int minY, int maxY, Dificuldade dificuldade) {
         Nave nave = new Nave("A-1", 4);
         Missao missao = new Missao(nave);
 
@@ -245,7 +256,7 @@ public class Main {
             }
         }
 
-        while (missao.getAsteroides().size() < 2) {
+        while (missao.getAsteroides().size() < dificuldade.getQtdAsteroides()) {
             int x = random.nextInt(maxX - minX + 1) + minX;
             int y = random.nextInt(maxY - minY + 1) + minY;
             if (x == nave.getX() && y == nave.getY())
@@ -255,7 +266,7 @@ public class Main {
             missao.addAsteroide(new Asteroide(x, y));
         }
 
-        while (missao.getInimigos().size() < 2) {
+        while (missao.getInimigos().size() < dificuldade.getQtdInimigos()) {
             int x = random.nextInt(maxX - minX + 1) + minX;
             int y = random.nextInt(maxY - minY + 1) + minY;
             if (x == nave.getX() && y == nave.getY())
