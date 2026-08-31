@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Random;
 
 public class Missao {
-
+    
     private Nave nave;
     private List<Passageiro> passageiros = new ArrayList<>();
     private List<Asteroide> asteroides = new ArrayList<>();
@@ -45,10 +45,10 @@ public class Missao {
     }
 
     public void moverInimigos(Random random, int minX, int maxX, int minY, int maxY) {
-        for (Inimigo inimigo : inimigos) {
+        for (Inimigo each : inimigos) {
             int direcao = random.nextInt(4);
-            int novoX = inimigo.getX();
-            int novoY = inimigo.getY();
+            int novoX = each.getX();
+            int novoY = each.getY();
 
             if (direcao == 0 && novoY > minY) {
                 novoY--;
@@ -60,18 +60,18 @@ public class Missao {
                 novoX++;
             }
 
-            inimigo.setX(novoX);
-            inimigo.setY(novoY);
+            each.setX(novoX);
+            each.setY(novoY);
         }
     }
 
     public boolean verificaColisao() {
-        for (Asteroide a : asteroides) {
-            if (a.colideCom(nave))
+        for (Asteroide each : asteroides) {
+            if (each.colideCom(nave))
                 return true;
         }
-        for (Inimigo i : inimigos) {
-            if (i.colideCom(nave))
+        for (Inimigo each : inimigos) {
+            if (each.colideCom(nave))
                 return true;
         }
         return false;

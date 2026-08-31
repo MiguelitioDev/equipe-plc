@@ -238,16 +238,16 @@ public class Main {
     private static boolean posicaoOcupada(Missao missao, int x, int y) {
         if (missao.getNave().getX() == x && missao.getNave().getY() == y)
             return true;
-        for (Passageiro p : missao.getPassageiros()) {
-            if (p.getX() == x && p.getY() == y)
+        for (Passageiro each : missao.getPassageiros()) {
+            if (each.getX() == x && each.getY() == y)
                 return true;
         }
-        for (Asteroide a : missao.getAsteroides()) {
-            if (a.getX() == x && a.getY() == y)
+        for (Asteroide each : missao.getAsteroides()) {
+            if (each.getX() == x && each.getY() == y)
                 return true;
         }
-        for (Inimigo i : missao.getInimigos()) {
-            if (i.getX() == x && i.getY() == y)
+        for (Inimigo each : missao.getInimigos()) {
+            if (each.getX() == x && each.getY() == y)
                 return true;
         }
         return false;
