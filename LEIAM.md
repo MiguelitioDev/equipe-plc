@@ -81,3 +81,13 @@ Main.java(
   Chamada do método missao.moverInimigos() a cada turno do loop
   Renderização do caractere 'X' para os Inimigos no mapa e atualização da legenda
 )
+
+## Codigo Modificado Por Lucas:
+
+Main.java(
+  Criação do Menu Principal Interativo com opções em loop (Jogar, Top 5, Resetar Ranking, Sair)
+  Adição da Base (0,0) com exibição do caractere 'L' no mapa
+  Atualização das regras de vitória (necessário resgatar todos e voltar para a Base (0,0))
+  Cálculo e exibição de Estatísticas (duração da partida em segundos e total de passos/movimentos)
+  Implementação da exclusão segura do ranking na memória e no arquivo ranking.json ao resetar
+)

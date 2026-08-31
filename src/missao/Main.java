@@ -95,17 +95,9 @@ public class Main {
                     while (running) {
                         desenharMapa(missao, -5, 5, -5, 5, score, pilotoNome);
                         System.out.printf(
-                                "Nave em (%d,%d) | Vida: %d | Pontos: %d | Passageiros a bordo: %d | Passageiros restantes: %d\n",
+                                "Nave em (%d,%d) | Vidas: %d | Pontos: %d | Passageiros a bordo: %d | Passageiros restantes: %d\n",
                                 nave.getX(), nave.getY(), nave.getVida(), score, nave.getPassageiros().size(),
                                 missao.todosEmbarcados() ? 0 : missao.getPassageiros().size());
-
-                        if (missao.verificaColisao()) {
-                            System.out.println("Colisão com asteroide! Nave Danificada");
-                            nave.perderVida();
-                        } else if (nave.getVida() <= 0) {
-                            System.out.println("Vida zerada! Missão abortada.");
-                            break;
-                        }
 
                         System.out.print("Para onde ir? ");
                         String line = scanner.nextLine().trim().toLowerCase();
@@ -153,6 +145,18 @@ public class Main {
                                 break;
                             default:
                                 System.out.println("Comando desconhecido.");
+                                continue;
+                        }
+
+                        missao.moverInimigos(random, minX, maxX, minY, maxY);
+
+                        if (missao.verificaColisao()) {
+                            nave.perderVida();
+                            System.out.printf("Colisão detectada! Nave danificada. Vidas restantes: %d\n", nave.getVida());
+                            if (nave.getVida() <= 0) {
+                                System.out.println("Game Over! A nave foi destruída.");
+                                break;
+                            }
                         }
 
                         if (score <= 0) {
@@ -251,6 +255,16 @@ public class Main {
             missao.addAsteroide(new Asteroide(x, y));
         }
 
+        while (missao.getInimigos().size() < 2) {
+            int x = random.nextInt(maxX - minX + 1) + minX;
+            int y = random.nextInt(maxY - minY + 1) + minY;
+            if (x == nave.getX() && y == nave.getY())
+                continue;
+            if (posicaoOcupada(missao, x, y))
+                continue;
+            missao.addInimigo(new Inimigo(x, y));
+        }
+
         return missao;
     }
 
@@ -262,6 +276,10 @@ public class Main {
         }
         for (Asteroide a : missao.getAsteroides()) {
             if (a.getX() == x && a.getY() == y)
+                return true;
+        }
+        for (Inimigo i : missao.getInimigos()) {
+            if (i.getX() == x && i.getY() == y)
                 return true;
         }
         return false;
@@ -308,6 +326,14 @@ public class Main {
                             }
                         }
                     }
+                    if (symbol == '.') {
+                        for (Inimigo i : missao.getInimigos()) {
+                            if (i.getX() == x && i.getY() == y) {
+                                symbol = 'X';
+                                break;
+                            }
+                        }
+                    }
                     if (symbol == '.' && x == 0 && y == 0) {
                         symbol = 'L';
                     }
@@ -317,7 +343,7 @@ public class Main {
             System.out.println();
         }
 
-        System.out.println("Legenda: N=Nave, P=Professor, E=Engenheiro, A=Asteroide, L=Base, .=Vazio");
+        System.out.println("Legenda: N=Nave, P=Professor, E=Engenheiro, S=Astronauta, A=Asteroide, X=Inimigo, L=Base, .=Vazio");
         System.out.println("Resumo de comandos: w(cima)/s(baixo)/a(esquerda)/d(direita) mover, c embarcar, q sair");
         System.out.println("Passageiros restantes:");
         for (Passageiro p : missao.getPassageiros()) {
