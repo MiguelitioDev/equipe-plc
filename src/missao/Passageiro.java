@@ -1,9 +1,5 @@
 package missao;
 
-/**
- * Entidade básica que representa um passageiro no mapa com nome, tipo e
- * coordenadas (x,y).
- */
 public class Passageiro {
     private String nome;
     private String tipo;

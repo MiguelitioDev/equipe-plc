@@ -37,15 +37,15 @@ public enum Dificuldade {
         }
         switch (s.trim().toLowerCase()) {
             case "facil":
-            case "fácil":
+            case "f\u00e1cil":
             case "1":
                 return FACIL;
             case "dificil":
-            case "difícil":
+            case "dif\u00edcil":
             case "3":
                 return DIFICIL;
             case "medio":
-            case "médio":
+            case "m\u00e9dio":
             case "2":
             default:
                 return MEDIO;
@@ -60,11 +60,11 @@ public enum Dificuldade {
     public String toString() {
         switch (this) {
             case FACIL:
-                return "Fácil";
+                return "Facil";
             case DIFICIL:
-                return "Difícil";
+                return "Dificil";
             default:
-                return "Médio";
+                return "Medio";
         }
     }
 }

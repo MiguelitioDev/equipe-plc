@@ -1,7 +1,6 @@
 package missao;
 
 public class Inimigo {
-
     private int x;
     private int y;
 
@@ -29,5 +28,4 @@ public class Inimigo {
     public boolean colideCom(Nave n) {
         return n.getX() == x && n.getY() == y;
     }
-
 }

@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Random;
 
 public class Missao {
-    
     private Nave nave;
     private List<Passageiro> passageiros = new ArrayList<>();
     private List<Asteroide> asteroides = new ArrayList<>();
@@ -67,20 +66,23 @@ public class Missao {
 
     public boolean verificaColisao() {
         for (Asteroide each : asteroides) {
-            if (each.colideCom(nave))
+            if (each.colideCom(nave)) {
                 return true;
+            }
         }
         for (Inimigo each : inimigos) {
-            if (each.colideCom(nave))
+            if (each.colideCom(nave)) {
                 return true;
+            }
         }
         return false;
     }
 
     public Passageiro passagemNaPosicao() {
         for (Passageiro p : passageiros) {
-            if (p.getX() == nave.getX() && p.getY() == nave.getY())
+            if (p.getX() == nave.getX() && p.getY() == nave.getY()) {
                 return p;
+            }
         }
         return null;
     }
@@ -91,8 +93,9 @@ public class Missao {
             Passageiro p = it.next();
             if (p.getX() == nave.getX() && p.getY() == nave.getY()) {
                 boolean ok = nave.embarcar(p);
-                if (ok)
+                if (ok) {
                     it.remove();
+                }
                 return ok;
             }
         }
@@ -102,5 +105,4 @@ public class Missao {
     public boolean todosEmbarcados() {
         return passageiros.isEmpty();
     }
-
 }
